@@ -6,6 +6,8 @@ const path = require('path');
 
 const port = 3000;
 
+const route = require('./routes');
+
 app.use(express.static(path.join(__dirname, 'public')));
 //middleware
 app.use(express.urlencoded({
@@ -23,17 +25,9 @@ app.engine('hbs', handlebars({
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resource/views'));
 
-app.get('/', (req, res) => {
-    res.render('home');
-});
+//Routes init
+route(app);
 
-app.get('/news', (req, res) => {
-    res.render('news');
-});
-
-app.get('/search', (req, res) => {
-    res.render('search');
-});
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
